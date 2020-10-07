@@ -10,13 +10,13 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  *
@@ -24,29 +24,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "LOGUIN2")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Loguin2.findAll", query = "SELECT l FROM Loguin2 l"),
-    @NamedQuery(name = "Loguin2.findByIdLoguin", query = "SELECT l FROM Loguin2 l WHERE l.idLoguin = :idLoguin"),
-    @NamedQuery(name = "Loguin2.findByUsuario", query = "SELECT l FROM Loguin2 l WHERE l.usuario = :usuario"),
-    @NamedQuery(name = "Loguin2.findByContrase\u00f1a", query = "SELECT l FROM Loguin2 l WHERE l.contrase\u00f1a = :contrase\u00f1a"),
-    @NamedQuery(name = "Loguin2.findByNombreUsuario", query = "SELECT l FROM Loguin2 l WHERE l.nombreUsuario = :nombreUsuario"),
-    @NamedQuery(name = "Loguin2.findByApellidoUsuario", query = "SELECT l FROM Loguin2 l WHERE l.apellidoUsuario = :apellidoUsuario")})
 public class Loguin2 implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @SequenceGenerator(name="loguin2_sec", sequenceName="sec_cod_loguin2", allocationSize = 1 )
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="loguin2_sec")
     @Column(name = "ID_LOGUIN")
     private BigDecimal idLoguin;
     @Size(max = 100)
     @Column(name = "USUARIO")
     private String usuario;
     @Size(max = 100)
-    @Column(name = "CONTRASE\u00d1A")
-    private String contraseña;
+    @Column(name = "CONTRASENA")
+    private String contrasena;
     @Size(max = 50)
     @Column(name = "NOMBRE_USUARIO")
     private String nombreUsuario;
@@ -77,13 +69,14 @@ public class Loguin2 implements Serializable {
         this.usuario = usuario;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
+
 
     public String getNombreUsuario() {
         return nombreUsuario;

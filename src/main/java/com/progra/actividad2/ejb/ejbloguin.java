@@ -7,6 +7,7 @@ package com.progra.actividad2.ejb;
 
 import com.progra.actividad2.entidades.Loguin2;
 import com.progra.actividad2.servicios.Loguin2FacadeLocal;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -18,7 +19,7 @@ import javax.inject.Named;
  */
 @Named("loguinbean")
 @RequestScoped
-public class ejbloguin {
+public class ejbloguin implements Serializable {
 
     @EJB
     private Loguin2FacadeLocal loguin2Facade;
